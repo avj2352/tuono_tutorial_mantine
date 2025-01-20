@@ -1,18 +1,14 @@
-import type { ReactNode, JSX } from 'react'
-
+import type { ReactNode, JSX } from 'react';
 import {
-  ColorSchemeScript,
   createTheme,
   MantineProvider,
   AppShell,
   Container,
 } from '@mantine/core';
 import type { CSSVariablesResolver } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import '@mantine/core/styles.css';
+import '@mantine/code-highlight/styles.css';
 import Navbar from '@/components/Navbar';
-
-import '@mantine/core/styles.css'
-import '@mantine/code-highlight/styles.css'
 
 interface RootRouteProps {
   children: ReactNode
@@ -80,24 +76,28 @@ const resolver: CSSVariablesResolver = (th) => ({
 
 export default function RootRoute({ children }: RootRouteProps): JSX.Element {
   return (
-    <html>
+    <>
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     </head>
-     <body>
-      <ColorSchemeScript />
-      <MantineProvider theme={theme} cssVariablesResolver={resolver}>
-        <AppShell>
-          <Navbar />
-          <AppShell.Main>
-            <Container id="mdx-root" component="article" size="md" p={20}>
-              {children}
-            </Container>
-          </AppShell.Main>
-        </AppShell>
-      </MantineProvider>
-    </body>
-    </html>
+      </head>
+      <body>
+        <main>
+          <MantineProvider theme={theme} cssVariablesResolver={resolver}>
+            <AppShell
+              layout="alt"
+              header={{ height: 60 }}
+              >
+              <Navbar />
+              <AppShell.Main>
+                <Container id="mdx-root" component="article" size="md" p={20}>
+                  {children}
+                </Container>
+              </AppShell.Main>
+            </AppShell>
+          </MantineProvider>
+        </main>
+      </body>
+    </>
   )
 }

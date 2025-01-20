@@ -6,7 +6,7 @@ interface IndexProps {
 	subtitle: string
 }
 
-export default function IndexPage({}: TuonoProps<IndexProps>): JSX.Element {
+export default function IndexPage({data}: TuonoProps<IndexProps>): JSX.Element {
 
 	return (
 		<Fragment>
