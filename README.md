@@ -67,5 +67,35 @@ Now I can use src alias using  `"@"` in my react components!!
 
 ---
 
+## Integrating Diesel Async with Tuono
 
+```rs
+use anyhow::{anyhow, Result};
+use diesel_async::pg::AsyncPgConnection;
+use diesel_async::pooled_connection::{deadpool::Pool, AsyncDieselConnectionManager};
 
+pub type AsyncDieselPgPool = deadpool_diesel::Pool<AsyncDieselConnectionManager<AsyncPgConnection>>;
+
+#[derive(Clone)]
+pub struct ApplicationState {
+    pub diesel_pg_pool: AsyncDieselPgPool,
+}
+
+pub fn init_diesel_pg_pool() -> Result<AsyncDieselPgPool> {
+    let manager = AsyncDieselConnectionManager::<diesel_async::AsyncPgConnection>::new(
+        "database_url"
+    );
+
+    Pool::builder(manager)
+        .build()
+        .map_err(|e| anyhow!("{:#}", e))
+}
+
+pub fn main() -> ApplicationState {
+    let diesel_pg_pool = init_diesel_pg_pool().expect("failed to initialize database pool");
+    let fetch = Client::new();
+    return ApplicationState {
+        diesel_pg_pool,
+    };
+}
+```

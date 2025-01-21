@@ -11,4 +11,6 @@ path = ".tuono/main.rs"
 tuono_lib = "0.17.0"
 serde = { version = "1.0.202", features = ["derive"] }
 reqwest = "0.12.12"
-
+libsql = "0.2"
+anyhow = "1.0"
+dotenvy = "0.15.7"
