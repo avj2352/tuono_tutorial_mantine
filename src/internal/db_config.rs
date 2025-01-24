@@ -8,8 +8,9 @@ pub fn init_connection() -> Connection {
     let db_url = std::env::var("TURSO_DATABASE_URL").expect("TURSO_DATABASE_URL must be set");
     let auth_token = std::env::var("TURSO_AUTH_TOKEN").expect("TURSO_AUTH_TOKEN must be set");
 
-    let db = Database::open_remote(db_url, auth_token).unwrap();        
-
-    let conn: Connection = db.connect().unwrap();
+    let db = Database::open_remote(db_url, auth_token)
+    .expect("Failed to initialize database");        
+    let conn: Connection = db.connect()
+    .expect("Failed to establish connection with database");
     conn
 }
