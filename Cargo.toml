@@ -3,6 +3,10 @@ name = "tuono-app"
 version = "0.0.1"
 edition = "2021"
 
+[lib]
+name = "tuono_tutorial"
+path = "src/lib.rs"
+
 [[bin]]
 name = "tuono"
 path = ".tuono/main.rs"

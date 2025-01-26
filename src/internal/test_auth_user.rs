@@ -4,9 +4,6 @@ use auth0_rs::Auth0;
 use dotenvy::dotenv;
 use tuono_lib::axum::http::StatusCode;
 use tuono_lib::Request;
-// ..custom
-use internal::auth_function::get_jwks;
-
 
 #[derive(serde::Serialize)]
 pub struct AuthResponse {
@@ -50,10 +47,7 @@ pub async fn auth_user(_req: Request) -> StatusCode {
     ]
 }
 "#;
-
     
-
-    let jwks_url = std::env::var("AUTH0_JWKS_URL").expect("AUTH0 credentials must be set");    
     let auth0 = Auth0::new(keys).expect("Error initializing auth0");
 
     // TODO - Retrieve from request header

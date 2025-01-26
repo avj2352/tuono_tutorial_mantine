@@ -14,7 +14,7 @@ pub async fn get_jwks() -> Result<String, Error> {
     println!("JWKS URL is: {}", &jwks_url);
     match fetch.get(jwks_url).send().await {
         Ok(res) => {
-            match res.json::<String>().await {
+            match res.text().await {
                 Ok(data) => {
                     Ok(data)
                 }

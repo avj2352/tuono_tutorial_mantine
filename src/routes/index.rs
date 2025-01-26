@@ -1,4 +1,3 @@
-use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use libsql::Connection;
 use tuono_lib::{Props, Request, Response};
@@ -16,7 +15,7 @@ struct User {
 }
 
 #[tuono_lib::handler]
-async fn get_all_users(_req: Request, fetch: Client, sql_conn: Connection) -> Response {
+async fn get_all_users(_req: Request, sql_conn: Connection) -> Response {
     let mut rows = sql_conn.query("SELECT * FROM users", ()).await.expect("Failed to execute query");
     let mut user_list: Vec<User> = Vec::new();
     while let Some(row) = rows.next().expect("Failed to fetch row") {

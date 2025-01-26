@@ -1,7 +1,4 @@
-mod internal;
-mod routes;
-
-use internal::db_config;
+use tuono_tutorial::internal::db_config;
 use reqwest::Client;
 use libsql::Connection;
 // Import here the just added reqwest library
