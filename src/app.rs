@@ -1,4 +1,5 @@
 mod internal;
+mod routes;
 
 use internal::db_config;
 use reqwest::Client;
