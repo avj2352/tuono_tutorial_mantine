@@ -7,7 +7,14 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-.tuono
-out
-target
+# ignore folders
+node_modules/
+.tuono/
+out/
+target/
+.vscode/
+.idea/
+
+# ignore files
+.DS_Store
+.env
